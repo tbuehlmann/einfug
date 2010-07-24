@@ -13,7 +13,7 @@ OptionParser.new do |opts|
     options[:r] = true
   end
   
-  opts.on('-f', '--full', 'Putting absolute paths instead of filenames as section titles.') do
+  opts.on('-f', '--full', 'Setting absolute paths instead of filenames as section titles.') do
     options[:f] = true
   end
 end.parse!
