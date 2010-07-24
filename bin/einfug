@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
+
+require 'einfug'
+require 'optparse'
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: einfug files|directories"
+  
+  opts.on('-r', '--recursive', 'If a directory is given as parameter, going recursively through it, putting all files.') do
+    options[:r] = true
+  end
+  
+  opts.on('-f', '--full', 'Putting absolute paths instead of filenames as section titles.') do
+    options[:f] = true
+  end
+end.parse!
+
+ARGV.each do |path|
+  puts Pathname.new(path).to_pastie(options[:r], options[:f])
+end
+
