@@ -9,25 +9,33 @@ Einfug is a library for transforming files into a pastie-friendly piece of text.
 ## Usage
     $ einfug [options] files|directories
 
+### Options
+#### -r, --recursive
+Pastifies all files in a directory recursively.
+Having `example_dir/foo.rb` and `example_dir/deeper_dir/bar.rb`, `$ einfug -r example_dir/` would pastify `foo.rb` and `bar.rb`.
+
+#### -f, --full
+Sets the full absolute filepath as section title instead of the single filename.
+
+Without -f:
+
+    $ einfug /home/tobias/example.rb
+    ## example.rb
+    ...
+
+With -f:
+
+    $ einfug -f /home/tobias/example.rb
+    ## /home/tobias/example.rb
+    ...
+
 ## Examples
-### Pastify a file:
 
     $ einfug example.rb
-
-### Pastify all files in a directory:
-
     $ einfug example_dir/
-
-### Pastify a file and all files in a directory:
-
     $ einfug example.rb example_dir/
-
-### Pastify all files in a directory recursively:
-
     $ einfug -r example_dir/
-
-### Pastify a file and use the full absolute path as section title
-
+    $ einfug -r example.rb example_dir/
     $ einfug -f example.rb
 
 ## License
