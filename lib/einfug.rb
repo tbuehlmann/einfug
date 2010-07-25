@@ -1,16 +1,17 @@
 require 'pathname'
 
 class Pathname
+  BAD_PATHS = [Pathname.new('.'), Pathname.new('..')]
+  
   def to_pastie(recursive = false, full = false)
     if self.file?
       return pastie(self, full)
     elsif self.directory?
       pathnames = []
-      bad_paths = [Pathname.new('.'), Pathname.new('..')]
       
       self.children.each do |pathname|
         if recursive
-          pathnames << pathname unless bad_paths.include?(pathname)
+          pathnames << pathname unless BAD_PATHS.include?(pathname)
         elsif pathname.file?
           pathnames << pathname
         end
