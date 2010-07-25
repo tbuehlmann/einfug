@@ -17,18 +17,24 @@ class Pathname
         end
       end
       
-      return pathnames.map { |pathname| pathname.to_pastie(recursive, full) }.join("\n")
+      return pathnames.map do |pathname|
+        pathname.to_pastie(recursive, full)
+      end.compact.join("\n")
     end
   end
   
   private
   
-  def pastie(file, full = false)
-    path = full ? file.realpath : file.basename
-    section = "## "
-    content = File.read(file).sub(/(\r|\n)+\z/, '')
-    
-    return "#{section}#{path}\n#{content}"
+  def pastie(pathname, full = false)
+    if pathname.readable?
+      path = full ? pathname.realpath : pathname.basename
+      section = "## "
+      content = File.read(pathname).sub(/(\r|\n)+\z/, '')
+      
+      return "#{section}#{path}\n#{content}"
+    else
+      return nil
+    end
   end
 end
 
