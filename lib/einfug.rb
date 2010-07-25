@@ -29,11 +29,13 @@ class Pathname
     if pathname.readable?
       path = full ? pathname.realpath : pathname.basename
       section = "## "
-      content = File.read(pathname).sub(/(\r|\n)+\z/, '')
+      content = begin
+        File.read(pathname).sub(/(\r|\n)+\z/, '')
+      rescue ArgumentError
+        File.read(pathname, :encoding => "BINARY").sub(/(\r|\n)+\z/, '')
+      end
       
       return "#{section}#{path}\n#{content}"
-    else
-      return nil
     end
   end
 end
