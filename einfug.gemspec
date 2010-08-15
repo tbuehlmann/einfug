@@ -1,6 +1,8 @@
+require File.join(File.dirname(__FILE__), 'lib', 'einfug')
+
 Gem::Specification.new do |s|
   s.name = 'einfug'
-  s.version = '0.0.1'
+  s.version = Einfug::VERSION
   s.summary = 'Pastie helper'
   s.description = 'Transform files and directories in a pastable form'
   

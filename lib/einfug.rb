@@ -1,5 +1,9 @@
 require 'pathname'
 
+module Einfug
+  VERSION = '0.0.1'
+end
+
 class Pathname
   BAD_PATHS = [Pathname.new('.'), Pathname.new('..')]
   
