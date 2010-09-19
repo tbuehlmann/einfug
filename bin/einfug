@@ -8,17 +8,21 @@ require 'optparse'
 options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: einfug files|directories"
-  
+
   opts.on('-r', '--recursive', 'If a directory is given as parameter, going recursively through it, putting all files.') do
     options[:r] = true
   end
-  
+
   opts.on('-f', '--full', 'Setting absolute paths instead of filenames as section titles.') do
     options[:f] = true
+  end
+
+  opts.on('-a', '--auto-extend', 'Sets the highlighting automatically using the file extension.') do
+    options[:a] = true
   end
 end.parse!
 
 ARGV.each do |path|
-  puts Pathname.new(path).to_pastie(options[:r], options[:f])
+  puts Pathname.new(path).to_pastie(options[:r], options[:f], options[:a])
 end
 
